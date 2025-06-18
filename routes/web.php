@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
+
+Route::get('/', [MessageController::class, 'index'])->name('messages.index');
+
+Route::get('/edit{id}', [MessageController::class, 'edit'])->name('messages.edit');
+
+Route::get('/create', [MessageController::class, 'create'])->name('messages.create');
+
+Route::post('/store', [MessageController::class, 'store'])->name('messages.store');
+
+Route::put('/update{id}', [MessageController::class, 'update'])->name('messages.update');
+
+Route::delete('/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
+
+
